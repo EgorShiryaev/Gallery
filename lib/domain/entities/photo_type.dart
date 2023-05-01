@@ -1,0 +1,4 @@
+enum PhotoType {
+  newest,
+  popular,
+}
