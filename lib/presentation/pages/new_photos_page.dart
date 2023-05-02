@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/instance_manager.dart';
 
-import '../../domain/entities/photo_entity.dart';
-import '../../mock/photos_mock.dart';
-import '../widgets/photo_grid.dart';
+import '../cubits/new_photos_cubit.dart';
+import '../widgets/home_page/photos_view.dart';
 
 class NewPhotosPage extends StatefulWidget {
   const NewPhotosPage({super.key});
@@ -18,7 +17,10 @@ class _NewPhotosPageState extends State<NewPhotosPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return  PhotoGrid(photos: photosMock);
+    return BlocProvider<NewPhotosCubit>(
+      create: (_) => Get.find()..loadFirstPage(),
+      child: const PhotosView<NewPhotosCubit>(),
+    );
   }
 
   @override

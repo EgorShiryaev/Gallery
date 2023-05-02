@@ -10,6 +10,7 @@ class PhotoInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat.yMMMd().format(photo.dateCreate);
+    final descriptionIsEmpty = photo.description.trim().isEmpty;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,27 +19,19 @@ class PhotoInformation extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.left,
         ),
-        const SizedBox(height: 5),
-        Text(
-          photo.user,
-          style: Theme.of(context).textTheme.titleMedium,
-          textAlign: TextAlign.left,
-        ),
-        const SizedBox(height: 15),
-        Text(
-          photo.description,
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.left,
-        ),
-        Row(
-          children: [
-            if (photo.isNew) const Chip(label: Text('New')),
-            if (photo.isPopular) const Chip(label: Text('Popular')),
-          ],
-        ),
+        if (!descriptionIsEmpty) const SizedBox(height: 15),
+        if (!descriptionIsEmpty)
+          Text(
+            photo.description,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.left,
+          ),
+        if (photo.isNew) const Chip(label: Text('New')),
+        if (photo.isPopular) const Chip(label: Text('Popular')),
         Text(
           formattedDate,
           style: Theme.of(context).textTheme.labelMedium,
+          textAlign: TextAlign.left,
         ),
       ],
     );

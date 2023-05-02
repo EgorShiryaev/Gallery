@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../themes/app_theme.dart';
-import '../widgets/photo.dart';
+import '../widgets/network_image_view.dart';
 import '../widgets/photo_page/photo_information.dart';
 import 'arguments/photo_page_arguments.dart';
 
@@ -27,7 +26,7 @@ class PhotoPage extends StatelessWidget {
                 [
                   SizedBox(
                     height: 200,
-                    child: Photo(photo: photo),
+                    child: NetworkImageView(name: photo.image.name),
                   ),
                   Padding(
                     padding: AppTheme.pagePadding,

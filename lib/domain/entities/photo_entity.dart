@@ -22,7 +22,7 @@ class PhotoEntity {
 
   final ImageEntity image;
 
-  final String user;
+  final String? user;
 
   PhotoEntity({
     required this.id,
@@ -32,7 +32,7 @@ class PhotoEntity {
     required this.isNew,
     required this.isPopular,
     required this.image,
-    required this.user,
+     this.user,
   });
 
   factory PhotoEntity.fromJson(Map<String, dynamic> json) =>

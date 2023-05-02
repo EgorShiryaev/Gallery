@@ -9,5 +9,7 @@ class LightColorScheme extends ColorScheme {
           secondary: const Color(0xFF2F1767),
           tertiary: const Color(0xFF4A4A4A),
           outline: const Color(0xFF8C8C8C),
+          background: const Color(0xFFFFFFFF),
+          onBackground: const Color(0xFF000000),
         );
 }

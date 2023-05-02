@@ -8,4 +8,5 @@ class AppSettings {
     baseUrl: '$baseUrl/api',
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
   );
+  static const limit = 10;
 }
