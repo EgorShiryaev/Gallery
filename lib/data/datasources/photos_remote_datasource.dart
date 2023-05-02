@@ -1,37 +1,40 @@
 import 'package:dio/dio.dart';
 
+import '../../core/app_settings.dart';
+import '../../core/empty_photo_list_entity.dart';
 import '../../core/exceptions/server_not_available_exception.dart';
+import '../../domain/entities/photo_list_entity.dart';
 import '../../domain/entities/photo_type.dart';
-import '../../domain/entities/photo_entity.dart';
-import 'photo_datasource.dart';
+import 'photos_datasource.dart';
 
-class PhotoRemoteDatasource extends PhotoDatasource {
+class PhotosRemoteDatasource extends PhotosDatasource {
   final Dio _requestManager;
 
-  PhotoRemoteDatasource({required Dio requestManager})
+  PhotosRemoteDatasource({required Dio requestManager})
       : _requestManager = requestManager;
 
   @override
-  Future<List<PhotoEntity>> getPage({
-    required int page,
+  Future<PhotoListEntity> getPage({
     required PhotoType type,
-    required int limit,
+    int page = 1,
   }) async {
     try {
       final params = {
         'new': type == PhotoType.newest,
         'popular': type == PhotoType.popular,
         'page': page,
-        'limit': limit,
+        'limit': AppSettings.limit,
       };
       final response = await _requestManager.get<Map<String, dynamic>>(
         '/photos',
         queryParameters: params,
       );
-      final List<dynamic> data = response.data?['data'] ?? [];
-      return data
-          .map((value) => PhotoEntity.fromJson(value as Map<String, dynamic>))
-          .toList();
+
+      if (response.data == null) {
+        return emptyPhotoListEntity;
+      }
+
+      return PhotoListEntity.fromJson(response.data!);
     } on DioError catch (error) {
       if (error.response == null) {
         throw ServerNotAvailableException();

@@ -14,7 +14,7 @@ PhotoEntity _$PhotoEntityFromJson(Map<String, dynamic> json) => PhotoEntity(
       isNew: json['new'] as bool,
       isPopular: json['popular'] as bool,
       image: ImageEntity.fromJson(json['image'] as Map<String, dynamic>),
-      user: json['user'] as String,
+      user: json['user'] as String?,
     );
 
 Map<String, dynamic> _$PhotoEntityToJson(PhotoEntity instance) =>

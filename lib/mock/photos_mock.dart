@@ -1,4 +1,6 @@
-import 'package:gallery/domain/entities/photo_entity.dart';
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../domain/entities/photo_entity.dart';
 
 final photosMock = [
   {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
-import '../../domain/entities/photo_entity.dart';
-import '../../mock/photos_mock.dart';
-import '../widgets/photo_grid.dart';
+import '../cubits/popular_photos_cubit.dart';
+import '../widgets/home_page/photos_view.dart';
+
 
 class PopularPhotosPage extends StatefulWidget {
   const PopularPhotosPage({super.key});
@@ -16,7 +18,10 @@ class _PopularPhotosPageState extends State<PopularPhotosPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return PhotoGrid(photos: photosMock);
+    return BlocProvider<PopularPhotosCubit>(
+      create: (_) => Get.find()..loadFirstPage(),
+      child: const PhotosView<PopularPhotosCubit>(),
+    );
   }
 
   @override
